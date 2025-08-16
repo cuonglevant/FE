@@ -1,0 +1,26 @@
+{
+  "cli": {
+    "version": ">= 16.6.1",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_BE_URL": "https://192.1168.1.102",
+        "EXPO_PUBLIC_FLASK_URL": "http://192.168.1.102",
+        "EXPO_PUBLIC_RELEASE_CHANNEL": "production"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
