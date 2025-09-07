@@ -1,10 +1,28 @@
-// Cấu hình động cho API endpoint
-// Lấy biến môi trường từ globalThis hoặc process.env (tùy môi trường build)
-const env = (typeof globalThis !== 'undefined' ? globalThis : process.env) as any;
+// Unified API configuration (single source of truth)
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
+
+const ENV_FLASK = (process.env as any)?.EXPO_PUBLIC_FLASK_URL || (globalThis as any)?.EXPO_PUBLIC_FLASK_URL;
+const ENV_BE = (process.env as any)?.EXPO_PUBLIC_BE_URL || (globalThis as any)?.EXPO_PUBLIC_BE_URL;
+
+const execEnv = (Constants as any)?.executionEnvironment; // 'bare' | 'standalone' | 'storeClient'
+const releaseChannel = (process.env as any)?.EXPO_PUBLIC_RELEASE_CHANNEL || '';
+const isDevice = execEnv === 'standalone' || (!!releaseChannel && releaseChannel !== 'development');
+
+const FALLBACK_LAN_IP = '192.168.1.4';
+const localhostForPlatform = Platform.OS === 'android' ? FALLBACK_LAN_IP : 'localhost';
+
+export const FLASK_URL = ENV_FLASK || `http://${localhostForPlatform}:5000`;
+export const API_BASE = `${FLASK_URL}`;
+export const UPLOAD_URL = `${FLASK_URL}/scan/p1`;
+export const BE_URL = ENV_BE || `http://${localhostForPlatform}:5000`;
 
 export const API_CONFIG = {
-  API_BASE: env.EXAM_API_BASE || 'http://192.168.1.4:8080',
-  BE_URL: env.EXAM_BE_URL || 'http://192.168.1.4:8080',
-  FLASK_URL: env.EXAM_FLASK_URL || 'http://192.168.1.4:5000',
-  isDevice: false,
+  API_BASE,
+  BE_URL,
+  FLASK_URL,
+  isDevice,
+  UPLOAD_URL,
 };
+
+export default API_CONFIG;

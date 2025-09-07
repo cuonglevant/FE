@@ -14,8 +14,8 @@
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_BE_URL": "https://192.1168.1.102",
-        "EXPO_PUBLIC_FLASK_URL": "http://192.168.1.102",
+        "EXPO_PUBLIC_BE_URL": "https://192.1168.1.4:5000",
+        "EXPO_PUBLIC_FLASK_URL": "http://192.168.1.4:5000",
         "EXPO_PUBLIC_RELEASE_CHANNEL": "production"
       }
     }

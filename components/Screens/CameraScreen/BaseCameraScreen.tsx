@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import { View, Alert, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import { Camera, useCameraDevices, useCameraDevice } from 'react-native-vision-camera';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import RNFS from 'react-native-fs';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +18,7 @@ interface BaseCameraScreenProps {
 export function BaseCameraScreen({ title, filePrefix, onCapturedNavigate = 'PreviewScreen', extraButtons, onCaptured }: BaseCameraScreenProps) {
   const navigation = useNavigation<any>();
   const devices = useCameraDevices();
-  const device = Array.isArray(devices) ? devices.find((d) => d.position === 'back') : (devices as any)?.back || undefined;
+  const device = useCameraDevice('back');
   const insets = useSafeAreaInsets();
   const [permission, setPermission] = useState<'authorized' | 'denied' | 'not-determined'>('not-determined');
   const [cameraReady, setCameraReady] = useState(false);

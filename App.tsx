@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CameraScreen from 'components/Screens/CameraScreen/CameraScreen';
 import CaptureExamCodeScreen from 'components/Screens/CameraScreen/CaptureExamCodeScreen';
 import CaptureAnswersScreen from 'components/Screens/CameraScreen/CaptureAnswersScreen';
+import CreateCorrectAnswersScreen from 'components/Screens/CreateCorrectAnswersScreen';
 import CreateExamScreen from 'components/Screens/CreateExamScreen';
 import HistoryScreen from 'components/Screens/HistoryScreen';
 import SettingScreen from 'components/Screens/SettingScreen';
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name="PreviewScreen" component={PreviewScreen} />
           <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
           <Stack.Screen name="AutoGradingFlowScreen" component={AutoGradingFlowScreen} />
+          <Stack.Screen name="CreateCorrectAnswersScreen" component={CreateCorrectAnswersScreen} />
         </Stack.Navigator>
         <StatusBar style="auto" />
       </NavigationContainer>

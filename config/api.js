@@ -22,14 +22,14 @@ const localhostForPlatform = Platform.OS === 'android' ? FALLBACK_LAN_IP : 'loca
 // Flask/OpenCV server (image upload & grading)
 export const FLASK_URL = ENV_FLASK || `http://${localhostForPlatform}:5000`;
 // JSON API endpoint for processing exam images
-export const UPLOAD_URL = `${FLASK_URL}/api/process`;
+export const UPLOAD_URL = `${FLASK_URL}/scan/p1`;
 
 // Node/Express backend
 // In production (installed APK), we must NOT rely on LAN IPs; BE URL must be a publicly reachable domain / HTTPS.
 // Provide EXPO_PUBLIC_BE_URL at build time. We deliberately do not fallback to LAN IP when running standalone device
 // because that would be unreachable; instead we still fallback only if dev (not standalone).
-export const BE_URL = ENV_BE || (isDevice ? 'https://YOUR_PUBLIC_BACKEND_DOMAIN' : `http://${localhostForPlatform}:8080`);
-export const API_BASE = `${BE_URL}/api`;
+export const BE_URL = ENV_BE || `http://${localhostForPlatform}:5000`;
+export const API_BASE = `${FLASK_URL}`;
 
 // Helper for logging current resolved endpoints (dev only)
 if (__DEV__) {

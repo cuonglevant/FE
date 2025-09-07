@@ -5,7 +5,7 @@ import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import RNFS from 'react-native-fs';
 import { Ionicons } from '@expo/vector-icons';
-import { UPLOAD_URL } from '../../../config/api';
+import { UPLOAD_URL } from '../../../config/apiConfig';
 
 import { Header } from '../../ui/Header';
 
@@ -97,8 +97,8 @@ export default function CameraScreen() {
         return;
       }
       const formData = new FormData();
-      // Gửi theo key 'p1' để khớp với Flask API
-      formData.append('p1', {
+      // Gửi theo key 'image' để khớp với Flask API /scan/*
+      formData.append('image', {
         uri: 'file://' + testFilePath,
         name: testFilePath.endsWith('.png') ? 'p1.png' : 'p1.jpg',
         type: testFilePath.endsWith('.png') ? 'image/png' : 'image/jpeg',

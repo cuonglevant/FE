@@ -142,6 +142,7 @@ export default function Home() {
         onClose={() => setMenuOpen(false)}
         items={[
           { icon: 'checkbox-outline', label: 'Chấm bài', onPress: () => { setMenuOpen(false); navigation.navigate('AutoGradingFlowScreen'); } },
+          { icon: 'create-outline', label: 'Tạo đáp án đúng', onPress: () => { setMenuOpen(false); navigation.navigate('CreateCorrectAnswersScreen' as any); } },
           { icon: 'school-outline', label: 'Lớp học', onPress: () => { setMenuOpen(false); } },
           { icon: 'settings-outline', label: 'Cài đặt', onPress: () => { setMenuOpen(false); navigation.navigate('SettingScreen'); } },
           // { icon: 'document-text-outline', label: 'Giấy thi', onPress: () => { setMenuOpen(false); } },

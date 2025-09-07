@@ -1,4 +1,4 @@
-import { API_BASE } from '../config/api';
+import { API_BASE } from '../config/apiConfig';
 
 async function request(path, options = {}) {
 	const url = `${API_BASE}${path}`;
@@ -33,20 +33,20 @@ async function request(path, options = {}) {
 
 export const APIService = {
 	// Auth
-	signup: (payload) => request('/auth/signup', { method: 'POST', body: JSON.stringify(payload) }),
-	signin: (payload) => request('/auth/signin', { method: 'POST', body: JSON.stringify(payload) }),
-	signout: () => request('/auth/signout', { method: 'POST' }),
+	signup: (payload) => request('/signup', { method: 'POST', body: JSON.stringify(payload) }),
+	signin: (payload) => request('/login', { method: 'POST', body: JSON.stringify(payload) }),
+	signout: () => request('/logout', { method: 'POST' }),
 		sendResetCode: (payload) => request('/auth/send-reset-code', { method: 'POST', body: JSON.stringify(payload) }),
 		resetPassword: (payload) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify(payload) }),
 
 	// Exam
-	getExams: () => request('/exam', { method: 'GET' }),
+	getExams: () => request('/exams', { method: 'GET' }),
 	getExamById: (id) => request(`/exam/${id}`, { method: 'GET' }),
 	createExam: (payload) => request('/exam', { method: 'POST', body: JSON.stringify(payload) }),
 
-	// Integration checks
-	testFlaskConnection: () => request('/integration/test-flask-connection', { method: 'GET' }),
-	testGradingCompatibility: (payload = {}) => request('/integration/test-grading-compatibility', { method: 'POST', body: JSON.stringify(payload) }),
+	// Integration checks (map to /health for availability)
+	testFlaskConnection: () => request('/health', { method: 'GET' }),
+	testGradingCompatibility: (payload = {}) => request('/health', { method: 'GET' }),
 };
 
 export default APIService;
