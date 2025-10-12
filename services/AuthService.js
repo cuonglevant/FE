@@ -1,8 +1,8 @@
 import APIService from './APIService';
 
 export const AuthService = {
-	login: ({ username, email, password }) => APIService.signin({ email: email || username, password }),
-	register: ({ username, email, password }) => APIService.signup({ email: email || username, password }),
+	login: ({ email, password }) => APIService.signin({ email, password }),
+	register: ({ email, password }) => APIService.signup({ email, password }),
 	logout: () => APIService.signout(),
 
 	// Forgot password flows - wire to backend when endpoints are ready

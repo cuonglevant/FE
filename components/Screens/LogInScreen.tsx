@@ -64,15 +64,23 @@ export default function LoginScreen() {
         </TouchableOpacity>
         <TouchableOpacity className="w-full rounded-lg bg-green-800 py-3 mb-3"
           onPress={async () => {
-            if (!email.trim() || !password.trim()) {
+            const trimmedEmail = email.trim().toLowerCase();
+            const trimmedPassword = password.trim();
+            
+            if (!trimmedEmail || !trimmedPassword) {
               alert('Vui lòng nhập đầy đủ thông tin!');
               return;
             }
             try {
-              await AuthService.login({ username: email, password });
+              await AuthService.login({ 
+                email: trimmedEmail,
+                password: trimmedPassword 
+              });
+              alert('Đăng nhập thành công!');
               navigation.navigate('Home');
             } catch (e: any) {
-              alert(e.message || 'Đăng nhập thất bại');
+              console.error('Login error:', e);
+              alert(e.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.');
             }
           }}
         >

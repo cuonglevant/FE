@@ -9,13 +9,21 @@ const execEnv = (Constants as any)?.executionEnvironment; // 'bare' | 'standalon
 const releaseChannel = (process.env as any)?.EXPO_PUBLIC_RELEASE_CHANNEL || '';
 const isDevice = execEnv === 'standalone' || (!!releaseChannel && releaseChannel !== 'development');
 
+// Production backend URL
+const PRODUCTION_URL = 'https://be-service-od7h.onrender.com';
+
+// Development fallback
 const FALLBACK_LAN_IP = '192.168.1.4';
 const localhostForPlatform = Platform.OS === 'android' ? FALLBACK_LAN_IP : 'localhost';
+const DEV_URL = `http://${localhostForPlatform}:5000`;
 
-export const FLASK_URL = ENV_FLASK || `http://${localhostForPlatform}:5000`;
-export const API_BASE = `${FLASK_URL}`;
-export const UPLOAD_URL = `${FLASK_URL}/scan/p1`;
-export const BE_URL = ENV_BE || `http://${localhostForPlatform}:5000`;
+// Use production URL by default, can be overridden by env var
+export const API_BASE = ENV_FLASK || ENV_BE || PRODUCTION_URL;
+export const FLASK_URL = API_BASE;
+export const BE_URL = API_BASE;
+
+// Specific endpoints
+export const UPLOAD_URL = `${API_BASE}/scan/answers`;
 
 export const API_CONFIG = {
   API_BASE,
@@ -23,6 +31,8 @@ export const API_CONFIG = {
   FLASK_URL,
   isDevice,
   UPLOAD_URL,
+  PRODUCTION_URL,
+  DEV_URL,
 };
 
 export default API_CONFIG;

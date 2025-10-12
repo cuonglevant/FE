@@ -33,10 +33,9 @@ function mapExamToCard(x: any) {
 
 type RootStackParamList = {
   CameraScreen: undefined;
-  HistoryScreen: undefined;
-  CreateExamScreen: undefined;
   SettingScreen: undefined;
-  AutoGradingFlowScreen: undefined;
+  CreateCorrectAnswersScreen: undefined;
+  MultiPartScanScreen: { examCode: string };
 };
 
 const sampleExams = [
@@ -118,7 +117,7 @@ export default function Home() {
             code={ex.code}
             createdAt={ex.createdAt}
             questionCount={ex.questionCount}
-            onPress={() => navigation.navigate('CameraScreen')}
+            onPress={() => navigation.navigate('MultiPartScanScreen', { examCode: ex.code })}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -141,7 +140,7 @@ export default function Home() {
         visible={menuOpen}
         onClose={() => setMenuOpen(false)}
         items={[
-          { icon: 'checkbox-outline', label: 'Chấm bài', onPress: () => { setMenuOpen(false); navigation.navigate('AutoGradingFlowScreen'); } },
+          { icon: 'checkbox-outline', label: 'Chấm bài', onPress: () => { setMenuOpen(false); navigation.navigate('CameraScreen'); } },
           { icon: 'create-outline', label: 'Tạo đáp án đúng', onPress: () => { setMenuOpen(false); navigation.navigate('CreateCorrectAnswersScreen' as any); } },
           { icon: 'school-outline', label: 'Lớp học', onPress: () => { setMenuOpen(false); } },
           { icon: 'settings-outline', label: 'Cài đặt', onPress: () => { setMenuOpen(false); navigation.navigate('SettingScreen'); } },

@@ -5,8 +5,8 @@ import CameraScreen from 'components/Screens/CameraScreen/CameraScreen';
 import CaptureExamCodeScreen from 'components/Screens/CameraScreen/CaptureExamCodeScreen';
 import CaptureAnswersScreen from 'components/Screens/CameraScreen/CaptureAnswersScreen';
 import CreateCorrectAnswersScreen from 'components/Screens/CreateCorrectAnswersScreen';
-import CreateExamScreen from 'components/Screens/CreateExamScreen';
-import HistoryScreen from 'components/Screens/HistoryScreen';
+import MultiPartScanScreen from 'components/Screens/MultiPartScanScreen';
+import ReviewScanScreen from 'components/Screens/ReviewScanScreen';
 import SettingScreen from 'components/Screens/SettingScreen';
 import { StatusBar } from 'expo-status-bar';
 import LogInScreen from 'components/Screens/LogInScreen';
@@ -14,7 +14,6 @@ import SignUpScreen from 'components/Screens/SignUpScreen';
 import PreviewScreen from 'components/Screens/PreviewScreen';
 import ResultsScreen from 'components/Screens/ResultsScreen';
 import ForgotPasswordScreen from 'components/Screens/ForgotPasswordScreen';
-import AutoGradingFlowScreen from 'components/Screens/AutoGradingFlowScreen';
 
 import Home from './components/home/Home';
 import './global.css';
@@ -36,15 +35,14 @@ export default function App() {
           <Stack.Screen name="CameraScreen" component={CameraScreen} />
           <Stack.Screen name="CaptureExamCodeScreen" component={CaptureExamCodeScreen} />
           <Stack.Screen name="CaptureAnswersScreen" component={CaptureAnswersScreen} />
-          <Stack.Screen name="HistoryScreen" component={HistoryScreen} />
-          <Stack.Screen name="CreateExamScreen" component={CreateExamScreen} />
+          <Stack.Screen name="MultiPartScanScreen" component={MultiPartScanScreen} />
+          <Stack.Screen name="ReviewScanScreen" component={ReviewScanScreen} />
           <Stack.Screen name="SettingScreen" component={SettingScreen} />
           <Stack.Screen name="LogInScreen" component={LogInScreen} />
           <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
           <Stack.Screen name="ForgotPasswordScreen" component={ForgotPasswordScreen} />
           <Stack.Screen name="PreviewScreen" component={PreviewScreen} />
           <Stack.Screen name="ResultsScreen" component={ResultsScreen} />
-          <Stack.Screen name="AutoGradingFlowScreen" component={AutoGradingFlowScreen} />
           <Stack.Screen name="CreateCorrectAnswersScreen" component={CreateCorrectAnswersScreen} />
         </Stack.Navigator>
         <StatusBar style="auto" />

@@ -90,17 +90,29 @@ export default function SignUpScreen() {
         <TouchableOpacity
           className="w-full rounded-lg bg-green-800 py-3 mb-3"
           onPress={async () => {
-            if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
+            const trimmedEmail = email.trim().toLowerCase();
+            const trimmedPassword = password.trim();
+            const trimmedConfirmPassword = confirmPassword.trim();
+            
+            if (!trimmedEmail || !trimmedPassword || !trimmedConfirmPassword) {
               alert('Vui lòng nhập đầy đủ thông tin!');
               return;
             }
-            if (password !== confirmPassword) {
+            if (trimmedPassword !== trimmedConfirmPassword) {
               alert('Mật khẩu không khớp');
               return;
             }
+            if (trimmedPassword.length < 6) {
+              alert('Mật khẩu phải có ít nhất 6 ký tự');
+              return;
+            }
             try {
-              // Using email as username by default for demo
-              await AuthService.register({ username: email, email, password });
+              // Using email for authentication
+              await AuthService.register({ 
+                email: trimmedEmail, 
+                password: trimmedPassword 
+              });
+              alert('Đăng ký thành công! Vui lòng đăng nhập.');
               navigation.navigate('LogInScreen');
             } catch (e: any) {
               alert(e.message || 'Đăng ký thất bại');

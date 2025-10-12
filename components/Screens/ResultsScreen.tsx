@@ -64,8 +64,8 @@ export default function ResultsScreen() {
     try {
       setSubmitting(true);
       const formData = new FormData();
-      // Flask /scan/* expects the field name 'image'
-      formData.append('image', {
+      // API expects p1_img, p2_img, p3_img - we'll send as p1_img for now
+      formData.append('p1_img', {
         uri: photoUri,
         name: 'p1.jpg',
         type: 'image/jpeg',
@@ -79,7 +79,7 @@ export default function ResultsScreen() {
       }
       const data = ct.includes('application/json') ? await response.json() : await response.text();
       if (typeof data === 'string') {
-        throw new Error(`Unexpected non-JSON response from Flask: ${data.slice(0, 200)}`);
+        throw new Error(`Unexpected non-JSON response: ${data.slice(0, 200)}`);
       }
       setResult(data);
       if (data.black_squares && Array.isArray(data.black_squares)) {
@@ -87,10 +87,10 @@ export default function ResultsScreen() {
       }
       Alert.alert(
         'Kết quả',
-        `Có ${data.filled} đáp án đã tô trên tổng ${data.total} ô.\nCó ${data.total_black_squares ?? (data.black_squares ? data.black_squares.length : 0)} ô vuông màu đen.`,
+        `Có ${data.filled || 0} đáp án đã tô trên tổng ${data.total || 0} ô.\nCó ${data.total_black_squares ?? (data.black_squares ? data.black_squares.length : 0)} ô vuông màu đen.`,
       );
-    } catch (e) {
-      Alert.alert('Lỗi', 'Không thể upload hoặc xử lý ảnh trên server');
+    } catch (e: any) {
+      Alert.alert('Lỗi', e?.message || 'Không thể upload hoặc xử lý ảnh trên server');
       console.error('Lỗi upload:', e);
     } finally {
       setSubmitting(false);

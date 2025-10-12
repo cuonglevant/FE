@@ -54,13 +54,19 @@ export default function CreateCorrectAnswersScreen() {
     return out;
   };
 
+  // Note: Backend API does not support manual entry, only image scanning
+  // This function is kept for future enhancement
   const saveManual = async () => {
+    Alert.alert('Chức năng chưa hỗ trợ', 'Backend hiện tại chỉ hỗ trợ tạo đáp án bằng cách quét ảnh. Vui lòng sử dụng camera để quét.');
+    return;
+    
+    /* Original implementation - requires backend support
     if (!examCode) return Alert.alert('Thiếu mã đề');
     const parsed = parseManualAnswers(manualAnswers);
     if (!parsed.length) return Alert.alert('Chưa có đáp án hợp lệ');
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/correctans/create_manual`, {
+      const res = await fetch(`${API_BASE}/correctans`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ exam_code: examCode, answers: parsed }),
@@ -76,6 +82,7 @@ export default function CreateCorrectAnswersScreen() {
     } finally {
       setLoading(false);
     }
+    */
   };
 
   const saveByScanning = async () => {
@@ -90,7 +97,7 @@ export default function CreateCorrectAnswersScreen() {
       form.append('p1_img', { uri: p1ImageUri, name: 'p1.jpg', type: 'image/jpeg' } as any);
       form.append('p2_img', { uri: p2ImageUri, name: 'p2.jpg', type: 'image/jpeg' } as any);
       form.append('p3_img', { uri: p3ImageUri, name: 'p3.jpg', type: 'image/jpeg' } as any);
-      const res = await fetch(`${API_BASE}/correctans/create`, { method: 'POST', body: form });
+      const res = await fetch(`${API_BASE}/correctans`, { method: 'POST', body: form });
       if (!res.ok) throw new Error(await res.text());
       const data = await res.json();
       Alert.alert('Thành công', `Đã lưu đáp án đúng cho mã đề ${examCode}`, {

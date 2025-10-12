@@ -3,5 +3,7 @@ export const COLORS = {
   beige: '#fff1db',
   darkBlue: '#536493',
   brown: '#d4bdac',
-  primary: '#16a34a', 
+  primary: '#16a34a',
+  blue: '#3b82f6',
+  lightGray: '#f3f4f6',
 };
